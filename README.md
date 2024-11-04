@@ -14,10 +14,4 @@ The BBQ dataset includes 58,492 unique examples, of which 1,100 templates were s
 
 BBQ includes both negative (socially harmful) and non-negative questions to measure potential response bias in the model. Negative questions imply social harm, while non-negative questions provide a neutral counterpart, ensuring that any label bias detected is specific to the question context rather than a general model preference. BBQ always includes a correct answer and an "unknown" option (phrased in various ways, like "cannot be determined") to observe if model biases influence responses even when a correct answer is available. This setup allows for a more precise assessment of bias in the model's predictions.
 
-<br>
-<h2 align="center"></h2>
-<p align="center">
-    <img src="![image](https://github.com/user-attachments/assets/00997ae8-ebbf-43d8-aa41-5d3c249587a9)
-" width="700" />
-</p>
-<br>
+![image](https://github.com/user-attachments/assets/f154a057-0c91-49e7-a69d-376d116209a0)
