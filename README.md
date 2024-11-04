@@ -7,7 +7,7 @@ Large financial institutions are exploring Generative AI to drive efficiencies a
 ## 🖼️ Bias Testing Overview
 
 <p align="center">
-    <img src="https://github.com/user-attachments/assets/ce42e39b-215f-44e9-be97-254db0f6490f" width="500" />
+    <img src="https://github.com/user-attachments/assets/ce42e39b-215f-44e9-be97-254db0f6490f" width="700" />
 </p>
 
 ## 🧪 Model Testing
@@ -45,7 +45,7 @@ This formula provides a finer-grained way to interpret ambiguous answers, where 
 In evaluating LLM fairness through red teaming, we identify specific bias types and then select adversarial or non-adversarial prompts tailored to uncover potential biases in the model's responses. Team members review and vote on responses as "yes" (biased) or "no" (unbiased), classifying them as Red, Amber, or Green based on bias severity.
 
 <p align="center">
-    <img src="https://github.com/user-attachments/assets/9f503999-d0c3-4973-992a-ef176bd63d6e" width="500" />
+    <img src="https://github.com/user-attachments/assets/9f503999-d0c3-4973-992a-ef176bd63d6e" width="700" />
 </p>
 
 ### Prompting Strategies  
@@ -63,7 +63,7 @@ Our red team employs both adversarial and non-adversarial prompts to elicit bias
 Bias responses are rated as Red (over 85% yes votes), Amber (50-85%), or Green (under 50%). An odds ratio analysis further highlights patterns of bias within each category, guiding bias mitigation efforts.
 
 <p align="center">
-    <img src="https://github.com/user-attachments/assets/0e8e78c7-94ca-4aac-ab0b-ec1d93c06982" width="500" />
+    <img src="https://github.com/user-attachments/assets/0e8e78c7-94ca-4aac-ab0b-ec1d93c06982" width="600" />
 </p>
 
 ## 🔖 Takeaway and Next Steps
