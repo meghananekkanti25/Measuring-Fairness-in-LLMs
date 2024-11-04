@@ -76,6 +76,6 @@ We could conduct additional model tests to provide a comprehensive analysis that
 3. **Risk of Limited Context**: Current tests focus on the US English-speaking context, so more specialized exercises are needed to apply findings to other scenarios.
 
 
-### Authors
+#### Authors
 Meghana Nekkanti, Zaheer Soleh, Bader Aleidan, Zineng Mao, Zhixing Li, Namrata Satpute
 
