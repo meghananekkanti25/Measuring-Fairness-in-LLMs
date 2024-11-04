@@ -15,3 +15,18 @@ The BBQ dataset includes 58,492 unique examples, of which 1,100 templates were s
 BBQ includes both negative (socially harmful) and non-negative questions to measure potential response bias in the model. Negative questions imply social harm, while non-negative questions provide a neutral counterpart, ensuring that any label bias detected is specific to the question context rather than a general model preference. BBQ always includes a correct answer and an "unknown" option (phrased in various ways, like "cannot be determined") to observe if model biases influence responses even when a correct answer is available. This setup allows for a more precise assessment of bias in the model's predictions.
 
 ![image](https://github.com/user-attachments/assets/f154a057-0c91-49e7-a69d-376d116209a0)
+
+### Scoring Methodology
+
+To scale the scoring effectively for ambiguous cases, we can adjust the formula to yield smaller values, reflecting a more nuanced understanding of the AI's responses under ambiguous contexts. Here’s an approach to achieve this:
+
+1. **Ambiguous Score Formula**:
+   - We can modify the formula by incorporating accuracy as a scaling factor, so that ambiguous, potentially biased responses score lower if accuracy is low.
+   - Here, **accuracy** is a value between 0 and 1, indicating the correctness of responses in ambiguous cases.
+   - By subtracting accuracy from 1, we reduce the impact of scores when accuracy is high, focusing on cases where inaccuracy might signal bias.
+   - The score of ambiguos context will decrease as accuracy improves, thereby penalizing ambiguous, inaccurate answers that may reveal bias.
+
+2. **Interpretation**:
+   - When accuracy is low, \( s_{\text{AMB}} \) reflects a higher potential for bias, as the model’s ambiguous responses may lean more toward bias rather than just neutral inaccuracy.
+   - As accuracy increases, ambiguous responses count less toward potential bias, indicating a more unbiased or balanced model behavior in uncertain contexts.
+This formula provides a finer-grained way to interpret ambiguous answers, where inaccuracy can indicate bias but is scaled down as model accuracy improves.
