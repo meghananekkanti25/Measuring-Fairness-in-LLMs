@@ -74,3 +74,8 @@ We could conduct additional model tests to provide a comprehensive analysis that
 1. **Bias Score Levels and Risk**: Different levels of bias scores can correspond to varying levels of risk, influencing the decision on deployment and use within an organization.
 2. **Red Teaming and Personal Bias**: Red teaming involves evaluating biases by individuals, which could introduce additional personal biases into the assessment.
 3. **Risk of Limited Context**: Current tests focus on the US English-speaking context, so more specialized exercises are needed to apply findings to other scenarios.
+
+
+### Authors
+Meghana Nekkanti, Zaheer Soleh, Bader Aleidan, Zineng Mao, Zhixing Li, Namrata Satpute
+
