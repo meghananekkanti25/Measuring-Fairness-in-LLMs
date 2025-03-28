@@ -1,8 +1,7 @@
 # 🖥️ Measuring-Fairness-in-LLMs
 
 ## ⚙️ Background
-
-Large financial institutions are exploring Generative AI to drive efficiencies and innovation, but deploying these technologies in a highly regulated sector presents significant challenges. Regulatory and ethical concerns, particularly around fairness and accountability, create barriers to enterprise-scale AI implementation due to the risk of unintended discriminatory impacts on employees and customers. Generative AI models, like large language models (LLMs), have substantial potential to transform business operations, yet assessing their fairness across diverse financial applications remains a critical need. Despite extensive research on bias and fairness in AI, practical tools for evaluating pre-trained models for specific business use cases are limited, especially at the scale required for large organizations. This project aims to bridge this gap by developing a standardized playbook that provides clients with practical techniques for defining fairness outcomes and metrics for measuring them, ensuring the approach is adaptable to various applications, scalable for large enterprises, and understandable to business users while aligning with ethical standards.
+Large financial institutions are increasingly exploring Generative AI to drive efficiency and innovation. However, deploying these technologies in a highly regulated industry presents significant challenges. Key concerns around regulation and ethics, particularly regarding fairness and accountability, create barriers to large-scale AI adoption due to the potential risk of unintended discriminatory effects on both employees and customers. Generative AI models, such as large language models (LLMs), hold transformative potential for business operations, yet assessing their fairness across diverse financial applications is crucial. Despite extensive research on AI bias and fairness, there is a lack of practical tools to evaluate pre-trained models for specific business use cases at the scale required by large enterprises. This project aims to address this gap by developing a standardized playbook. The playbook will provide clients with actionable techniques to define fairness outcomes and establish relevant metrics for evaluation. It will ensure that the approach is scalable, adaptable to a wide range of applications, and understandable for business users, while maintaining alignment with ethical standards.
 
 ## 🖼️ Bias Testing Overview
 
@@ -11,69 +10,64 @@ Large financial institutions are exploring Generative AI to drive efficiencies a
 </p>
 
 ## 🧪 Model Testing
-
-To evaluate fairness in LLMs, this playbook uses the BBQ (Bias Benchmark Questions) test, a standardized benchmarking method. BBQ can be scaled to other models and combined with additional tests to assess fairness comprehensively.
+To assess fairness in large language models (LLMs), this playbook employs the BBQ (Bias Benchmark Questions) test, a standardized benchmarking method. The BBQ test is scalable to other models and can be supplemented with additional tests to provide a thorough evaluation of fairness.
 
 ### BBQ Test
+The BBQ dataset consists of 58,492 unique examples, with 1,100 templates sampled for analysis. Each template contains two questions, answer choices, a partial context missing key information needed for an answer, and a disambiguating context to fill in the gaps. These templates are carefully crafted to reflect documented social biases, isolating specific biases for targeted analysis of their potential impact on model behavior. Annotations within the dataset identify bias-related values, potential targets, and the sources of these biases.
 
-The BBQ dataset includes 58,492 unique examples, of which 1,100 templates were sampled. Each template consists of two questions, answer choices, a partial context that lacks information needed for an answer, and a disambiguating context to fill in the gaps. Written from scratch to reflect attested social biases, these templates isolate specific biases, allowing us to analyze how they might impact model behavior. Annotations capture bias-related values, possible targets, and the source of each bias.
-
-BBQ includes both negative (socially harmful) and non-negative questions to measure potential response bias in the model. Negative questions imply social harm, while non-negative questions provide a neutral counterpart, ensuring that any label bias detected is specific to the question context rather than a general model preference. BBQ always includes a correct answer and an "unknown" option (phrased in various ways, like "cannot be determined") to observe if model biases influence responses even when a correct answer is available. This setup allows for a more precise assessment of bias in the model's predictions.
+The BBQ dataset includes both negative (socially harmful) and non-negative questions to assess potential response bias in the model. Negative questions suggest socially harmful implications, while non-negative questions provide neutral counterparts, ensuring that any identified bias is linked to the specific question context rather than a general model preference. Each template includes a correct answer and an "unknown" option (phrased in various ways, such as "cannot be determined"), enabling an examination of whether model biases influence responses, even when a correct answer is clearly available. This structured approach allows for a more accurate and nuanced assessment of bias in the model's outputs.
 
 <p align="center">
     <img src="https://github.com/user-attachments/assets/f154a057-0c91-49e7-a69d-376d116209a0" width="500" />
 </p>
 
 ### Scoring Methodology
-
-To scale the scoring effectively for ambiguous cases, we can adjust the formula to yield smaller values, reflecting a more nuanced understanding of the AI's responses under ambiguous contexts. Here’s an approach to achieve this:
+To scale the scoring effectively for ambiguous cases, we can refine the formula to produce smaller values, reflecting a more nuanced understanding of the AI's responses in uncertain contexts. Here’s an approach to achieve this:
 
 1. **Ambiguous Score Formula**:
-   - We can modify the formula by incorporating accuracy as a scaling factor, so that ambiguous, potentially biased responses score lower if accuracy is low.
-   - Here, **accuracy** is a value between 0 and 1, indicating the correctness of responses in ambiguous cases.
-   - By subtracting accuracy from 1, we reduce the impact of scores when accuracy is high, focusing on cases where inaccuracy might signal bias.
-   - The score of ambiguous context will decrease as accuracy improves, thereby penalizing ambiguous, inaccurate answers that may reveal bias.
+   - We can adjust the formula by incorporating accuracy as a scaling factor, so that ambiguous, potentially biased responses receive lower scores if the accuracy is low.
+   - **Accuracy** is a value between 0 and 1, indicating the correctness of responses in ambiguous cases.
+   - By subtracting accuracy from 1, we reduce the impact of scores when accuracy is high, thus focusing on cases where inaccuracy may indicate bias.
+   - The score for ambiguous contexts will decrease as accuracy improves, penalizing ambiguous, inaccurate answers that might suggest bias.
 
 2. **Interpretation**:
-   - When accuracy is low, score of ambiguous context reflects a higher potential for bias, as the model’s ambiguous responses may lean more toward bias rather than just neutral inaccuracy.
-   - As accuracy increases, ambiguous responses count less toward potential bias, indicating a more unbiased or balanced model behavior in uncertain contexts.
-This formula provides a finer-grained way to interpret ambiguous answers, where inaccuracy can indicate bias but is scaled down as model accuracy improves.
-
+   - When accuracy is low, the score for ambiguous contexts reflects a higher potential for bias, as the model’s unclear responses may lean more toward bias rather than neutral inaccuracy.
+   - As accuracy increases, ambiguous responses have less weight in assessing bias, suggesting more balanced or unbiased model behavior in uncertain situations.
+   
+This formula enables a more detailed interpretation of ambiguous answers, where inaccuracy might signal bias, but the penalty is reduced as model accuracy improves.
 
 ## 📌 Red Teaming
-
-In evaluating LLM fairness through red teaming, we identify specific bias types and then select adversarial or non-adversarial prompts tailored to uncover potential biases in the model's responses. Team members review and vote on responses as "yes" (biased) or "no" (unbiased), classifying them as Red, Amber, or Green based on bias severity.
+In evaluating fairness in large language models (LLMs) through red teaming, we identify specific types of bias and select adversarial or non-adversarial prompts designed to uncover potential biases in the model's responses. Team members review and vote on the responses as either "yes" (biased) or "no" (unbiased), categorizing them into Red, Amber, or Green based on the severity of the bias.
 
 <p align="center">
     <img src="https://github.com/user-attachments/assets/9f503999-d0c3-4973-992a-ef176bd63d6e" width="700" />
 </p>
 
 ### Prompting Strategies  
-Our red team employs both adversarial and non-adversarial prompts to elicit biased responses subtly or directly challenge the model's fairness, covering aspects such as gender, race, and ideology.
-1. **Low Context Prompts**: These prompts provide minimal context to evaluate how models generate responses with limited information, often revealing built-in biases.
-2. **Counterfactual Prompts**: Counterfactual prompts adjust only the subject (e.g., names) while keeping context constant, revealing bias by comparing responses to different demographic groups.
-3. **Pros and Cons Prompts**: This strategy evaluates the model's reasoning on the advantages and disadvantages in various scenarios, helping identify biases related to race or gender.
-4. **Roleplaying Prompts**: The model acts as a specific character, which can reveal biases when it follows role-specific instructions, such as making HR decisions.
-5. **Roleplaying x Counterfactual**:Combining roleplay with counterfactuals highlights biases by observing if the model’s character-driven responses differ by demographic.
-6. **Roleplaying x Pros and Cons**: Roleplay plus pros and cons prompts assess how assigned personas influence the model’s decision-making on biased topics.
-7. **Adversarial Prompts**: Adversarial prompts, especially provocative roles or instructions, aim to expose harmful biases and emphasize the need for safeguards to prevent misuse.
+Our red team uses both adversarial and non-adversarial prompts to subtly or directly challenge the model's fairness, exploring biases related to gender, race, and ideology. The strategies include:
+
+1. **Low Context Prompts**: These prompts provide minimal context, testing how the model generates responses with limited information, often revealing inherent biases.
+2. **Counterfactual Prompts**: These prompts alter only the subject (e.g., names) while keeping the rest of the context the same, helping to identify bias by comparing responses across different demographic groups.
+3. **Pros and Cons Prompts**: This strategy evaluates the model’s reasoning on the advantages and disadvantages of various scenarios, particularly highlighting biases related to race or gender.
+4. **Roleplaying Prompts**: In these scenarios, the model takes on a specific character, which can expose biases when it follows instructions tied to particular roles, such as making human resources decisions.
+5. **Roleplaying x Counterfactual**: Combining roleplay with counterfactual prompts, this strategy observes how the model’s character-driven responses differ by demographic, highlighting bias.
+6. **Roleplaying x Pros and Cons**: By combining roleplaying with pros and cons prompts, this strategy examines how assigned personas influence the model’s decision-making on potentially biased topics.
+7. **Adversarial Prompts**: These provocative prompts or instructions are designed to expose harmful biases, emphasizing the need for safeguards to prevent misuse.nstructions, aim to expose harmful biases and emphasize the need for safeguards to prevent misuse.
 
 ### Scoring  
-
-Bias responses are rated as Red (over 85% yes votes), Amber (50-85%), or Green (under 50%). An odds ratio analysis further highlights patterns of bias within each category, guiding bias mitigation efforts.
+Bias responses are categorized as Red (over 85% "yes" votes), Amber (50-85% "yes" votes), or Green (under 50% "yes" votes). An odds ratio analysis is conducted to identify patterns of bias in each category, helping to guide mitigation efforts for addressing the biases detected.
 
 <p align="center">
     <img src="https://github.com/user-attachments/assets/0e8e78c7-94ca-4aac-ab0b-ec1d93c06982" width="600" />
 </p>
 
 ## 🔖 Takeaway and Next Steps
-
-We could conduct additional model tests to provide a comprehensive analysis that thoroughly examines biases. By implementing Gage Repeatability and Reproducibility (GR&R), we can ensure consistency in assessments, while performing sentiment analysis on red-teaming responses would enhance the evaluation process. Additionally, we could integrate user testing to gather real user experience data, allowing for a deeper assessment of the LLM's fairness.
+We could perform additional model tests to provide a more comprehensive analysis of biases. By implementing Gage Repeatability and Reproducibility (GR&R), we can ensure consistency in the assessments. Additionally, conducting sentiment analysis on the red-teaming responses would further enhance the evaluation process. Integrating user testing would also allow us to collect real user experience data, providing deeper insights into the LLM's fairness.
 
 ## 🖍️ Limitations
-1. **Bias Score Levels and Risk**: Different levels of bias scores can correspond to varying levels of risk, influencing the decision on deployment and use within an organization.
-2. **Red Teaming and Personal Bias**: Red teaming involves evaluating biases by individuals, which could introduce additional personal biases into the assessment.
-3. **Risk of Limited Context**: Current tests focus on the US English-speaking context, so more specialized exercises are needed to apply findings to other scenarios.
+1. **Bias Score Levels and Risk**: Different bias score levels can indicate varying degrees of risk, which will impact decisions regarding deployment and usage within an organization.
+2. **Red Teaming and Personal Bias**: Red teaming involves evaluations conducted by individuals, which may introduce personal biases that could influence the assessment process.
+3. **Risk of Limited Context**: Current tests are primarily focused on the US English-speaking context, highlighting the need for more specialized exercises to extend findings to other linguistic and cultural scenarios.
 
 
 #### Authors
